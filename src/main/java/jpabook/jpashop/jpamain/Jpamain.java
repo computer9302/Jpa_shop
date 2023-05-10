@@ -1,9 +1,6 @@
 package jpabook.jpashop.jpamain;
 
-import jpabook.jpashop.domain.Book;
-import jpabook.jpashop.domain.Movie;
-import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.OrderItem;
+import jpabook.jpashop.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,12 +17,15 @@ public class Jpamain {
         tx.begin();
 
         try {
+
             Book book = new Book();
             book.setName("JPA");
             book.setAuthor("박준영");
 
-
             em.persist(book);
+
+            em.createQuery("select i from Item i where type(i) = 'Book'", Item.class)
+                            .getResultList();
 
 
             tx.commit();
